@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/**
+ * define custom user and passwd
+ */
 @Component
 public class MyUserDetailsService implements UserDetailsService {
 

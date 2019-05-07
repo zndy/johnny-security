@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * define custom resource access permission and login mode
+ */
 @EnableWebSecurity
 public class JohnnySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override

@@ -10,6 +10,7 @@
     <modules>
         <module>security-test</module>
         <module>resource-server1</module>
+        <module>authentication-server</module>
     </modules>
     <packaging>pom</packaging>
 
