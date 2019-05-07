@@ -16,26 +16,28 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("client_1")
+                .secret("{noop}123456")
                 .accessTokenValiditySeconds(7200)
                 .resourceIds(DEMO_RESOURCE_ID)
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("select")
                 .authorities("client")
-                .secret("{noop}123456")
 
                 .and()
                 .withClient("client_2")
+                .secret("{noop}123456")
                 .accessTokenValiditySeconds(7200)
                 .resourceIds(DEMO_RESOURCE_ID)
                 .authorizedGrantTypes("password", "refresh_token")
                 .scopes("select")
-                .authorities("client")
-                .secret("{noop}123456");
+                .authorities("client");
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         security.allowFormAuthenticationForClients();
+//        security.checkTokenAccess("permitAll()");
+        security.checkTokenAccess("isAuthenticated()");
     }
 
 }
