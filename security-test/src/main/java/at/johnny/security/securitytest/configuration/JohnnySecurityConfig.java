@@ -1,4 +1,4 @@
-package at.johnny.security.configuration;
+package at.johnny.security.securitytest.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

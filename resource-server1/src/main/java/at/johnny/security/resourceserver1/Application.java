@@ -1,4 +1,4 @@
-package at.johnny.security;
+package at.johnny.security.resourceserver1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package at.johnny.security.configuration;
+package at.johnny.security.securitytest.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;

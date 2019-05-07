@@ -1,4 +1,4 @@
-package at.johnny.security.restcontroller;
+package at.johnny.security.resourceserver1.restcontroller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,15 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class TestController {
-
     @GetMapping("/hello")
     public String hello(HttpServletRequest request){
-        return "ni hao " + request.getLocalName();
+        return "good morning " + request.getLocalAddr();
     }
 
     @GetMapping("/talk")
     public String talk(){
-        return "Es ist schoen heute.";
+        return "heute ist windig.";
     }
 
 }
