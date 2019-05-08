@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 
 @Configuration
 @EnableAuthorizationServer
-public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -38,15 +38,24 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
                 .authorities("client");
     }
 
+    /**
+     * for get and check Token
+     * @param security
+     */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         security.allowFormAuthenticationForClients();
-//        security.checkTokenAccess("permitAll()");
         security.checkTokenAccess("isAuthenticated()");
+//        security.checkTokenAccess("permitAll()");
     }
 
+    /**
+     * for authorizedGrantType password,
+     * without this method return error Unsupported grant type: password
+     * @param endpoints
+     */
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.authenticationManager(authenticationManager);
     }
 
