@@ -9,6 +9,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
 @EnableAuthorizationServer
@@ -18,6 +20,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
+
+    //for jwt
+    @Autowired
+    private TokenStore jwtTokenStore;
+
+    //for jwt
+    @Autowired
+    private AccessTokenConverter accessTokenConverter;
 
     private String DEMO_RESOURCE_ID = "resource1";
 
@@ -62,7 +72,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.authenticationManager(authenticationManager);
+        endpoints
+                .authenticationManager(authenticationManager)
+                .tokenStore(jwtTokenStore) //jwt
+                .accessTokenConverter(accessTokenConverter); //jwt
     }
 
 }
