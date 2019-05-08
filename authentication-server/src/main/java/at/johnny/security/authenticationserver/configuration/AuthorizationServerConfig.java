@@ -3,6 +3,7 @@ package at.johnny.security.authenticationserver.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -15,13 +16,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private PasswordEncoder bCryptPasswordEncoder;
+
     private String DEMO_RESOURCE_ID = "resource1";
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("client_1")
-                .secret("{noop}123456")
+                .secret(bCryptPasswordEncoder.encode("123456"))
                 .accessTokenValiditySeconds(7200)
                 .resourceIds(DEMO_RESOURCE_ID)
                 .authorizedGrantTypes("client_credentials", "refresh_token")
@@ -30,7 +34,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
                 .and()
                 .withClient("client_2")
-                .secret("{noop}123456")
+                .secret(bCryptPasswordEncoder.encode("123456"))
                 .accessTokenValiditySeconds(7200)
                 .resourceIds(DEMO_RESOURCE_ID)
                 .authorizedGrantTypes("password", "refresh_token")
@@ -40,6 +44,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     /**
      * for get and check Token
+     *
      * @param security
      */
     @Override
@@ -52,6 +57,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     /**
      * for authorizedGrantType password,
      * without this method return error Unsupported grant type: password
+     *
      * @param endpoints
      */
     @Override

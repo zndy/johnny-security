@@ -1,9 +1,11 @@
 package at.johnny.security.authenticationserver.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -14,6 +16,9 @@ import java.util.Objects;
 @Component
 public class MyUserDetailsService implements UserDetailsService {
 
+    @Autowired
+    private PasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String s) {
         if (!Objects.equals(s, "johnny")) {
@@ -21,7 +26,7 @@ public class MyUserDetailsService implements UserDetailsService {
         }
         UserDetails user =
                 User.withUsername("johnny")
-                        .password("{noop}123")
+                        .password(bCryptPasswordEncoder.encode("123"))
                         .roles("USER")
                         .build();
         return user;

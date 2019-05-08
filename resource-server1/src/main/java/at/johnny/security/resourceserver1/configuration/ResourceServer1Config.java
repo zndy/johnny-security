@@ -19,6 +19,10 @@ public class ResourceServer1Config extends ResourceServerConfigurerAdapter {
                 .anyRequest().authenticated();
     }
 
+    /**
+     * for remote AuthenticationServer
+     * @return
+     */
     @Bean
     public RemoteTokenServices remoteTokenService(){
         RemoteTokenServices tokenServices = new RemoteTokenServices();
