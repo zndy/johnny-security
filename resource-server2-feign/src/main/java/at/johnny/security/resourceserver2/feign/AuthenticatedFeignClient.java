@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface AuthenticatedFeignClient {
 
     @GetMapping("/talk")
-    String talk();
+    String callResourceServer1Talk();
 
 }

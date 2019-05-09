@@ -30,7 +30,7 @@ public class FeignController {
 
     @GetMapping("/remote-talk")
     public String callTalk(){
-        return authenticatedFeignClient.talk();
+        return authenticatedFeignClient.callResourceServer1Talk();
     }
 
 
