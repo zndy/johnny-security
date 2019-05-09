@@ -18,7 +18,7 @@ import java.util.Objects;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    private PasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String s){

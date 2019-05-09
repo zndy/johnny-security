@@ -11,6 +11,7 @@
         <module>security-test</module>
         <module>resource-server1</module>
         <module>authentication-server</module>
+        <module>resource-server2-feign</module>
     </modules>
     <packaging>pom</packaging>
 
