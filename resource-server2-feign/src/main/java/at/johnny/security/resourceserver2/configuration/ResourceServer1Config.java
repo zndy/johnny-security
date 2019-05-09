@@ -13,7 +13,8 @@ import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 public class ResourceServer1Config extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().permitAll();
+//        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().anyRequest().authenticated();
     }
 
     /**
