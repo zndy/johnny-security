@@ -1,5 +1,6 @@
 package at.johnny.security.resourceserver2.restcontroller;
 
+import at.johnny.security.resourceserver2.feign.AuthenticatedFeignClient;
 import at.johnny.security.resourceserver2.feign.LocalFeignClient;
 import at.johnny.security.resourceserver2.feign.ResourceServer1FeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class FeignController {
     @Autowired
     private ResourceServer1FeignClient resourceServer1FeignClient;
 
+    @Autowired
+    private AuthenticatedFeignClient authenticatedFeignClient;
+
     @GetMapping("/hello1")
     public String callLocalHello(){
         return localFeignClient.callLocalHello();
@@ -23,4 +27,11 @@ public class FeignController {
     public String callResourceServer1Hello(){
         return resourceServer1FeignClient.callResourceServer1Hello();
     }
+
+    @GetMapping("/remote-talk")
+    public String callTalk(){
+        return authenticatedFeignClient.talk();
+    }
+
+
 }
