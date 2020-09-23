@@ -59,6 +59,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
+        //allow send client_id and client_secret in params
+        //otherwise headers:{Authorization: 'Basic client_id:client_secret in base64}
         security.allowFormAuthenticationForClients();
         security.checkTokenAccess("isAuthenticated()");
 //        security.checkTokenAccess("permitAll()");
